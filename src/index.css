@@ -2,39 +2,66 @@
 
 /* Tema: tokens de cor centralizados. Escuro por padrão (comunidade maker curte),
    claro via prefers-color-scheme. */
+/* Marca Jolina 3D: roxo #5b21b6 / turquesa #2ec4cc / lavanda #e4d4f8 (da logo).
+   Dark: superfícies com tom roxo em vez de cinza neutro. */
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --color-bg: #0f1115;
-  --color-surface: #171a21;
-  --color-surface-2: #1f232c;
-  --color-border: #2b303b;
-  --color-text: #e6e8ee;
-  --color-muted: #9aa3b2;
-  /* Marca: roxo (primário) e turquesa (secundário) */
-  --color-accent: #a78bfa;
-  --color-accent-soft: #a78bfa2b;
-  --color-accent-2: #2dd4bf;
-  --color-accent-2-soft: #2dd4bf24;
+  --color-bg: #110b1c;
+  --color-surface: #191227;
+  --color-surface-2: #221934;
+  --color-border: #322646;
+  --color-text: #ece6f5;
+  --color-muted: #a99cbf;
+  --color-accent: #b48cf7;        /* roxo clareado p/ contraste no escuro */
+  --color-accent-soft: #b48cf72b;
+  --color-accent-2: #3fd0d8;      /* turquesa da logo, um tom mais claro */
+  --color-accent-2-soft: #3fd0d824;
   --color-ok: #22c55e;
 }
 
+/* Tema claro: aplicado (a) pela preferência do sistema, salvo se o usuário
+   forçou dark, ou (b) quando o usuário forçou light via botão. */
 @media (prefers-color-scheme: light) {
-  :root {
-    --color-bg: #f5f6f8;
-    --color-surface: #ffffff;
-    --color-surface-2: #f1f3f6;
-    --color-border: #dde1e7;
-    --color-text: #14171d;
-    --color-muted: #5b6472;
-    --color-accent: #7c3aed;
-    --color-accent-soft: #7c3aed1a;
-    --color-accent-2: #0d9488;
-    --color-accent-2-soft: #0d948818;
+  :root:not([data-theme="dark"]) {
+    --light: 1;
   }
+}
+:root[data-theme="light"] {
+  --light: 1;
+}
+
+/* Tokens do tema claro: lavanda da logo como fundo, cards brancos */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    color-scheme: light;
+    --color-bg: #ece3fa;
+    --color-surface: #ffffff;
+    --color-surface-2: #f5f0fc;
+    --color-border: #d9cdee;
+    --color-text: #1d1230;
+    --color-muted: #6b5d85;
+    --color-accent: #5b21b6;
+    --color-accent-soft: #5b21b61a;
+    --color-accent-2: #0e9aa3;
+    --color-accent-2-soft: #0e9aa31a;
+  }
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-bg: #ece3fa;
+  --color-surface: #ffffff;
+  --color-surface-2: #f5f0fc;
+  --color-border: #d9cdee;
+  --color-text: #1d1230;
+  --color-muted: #6b5d85;
+  --color-accent: #5b21b6;
+  --color-accent-soft: #5b21b61a;
+  --color-accent-2: #0e9aa3;
+  --color-accent-2-soft: #0e9aa31a;
 }
 
 html {
-  color-scheme: dark light;
+  color-scheme: dark;
 }
 
 body {

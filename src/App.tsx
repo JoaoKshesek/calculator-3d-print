@@ -6,6 +6,7 @@ import { Section } from './components/Section'
 import { NumberField } from './components/NumberField'
 import { Chips } from './components/Chips'
 import { Results } from './components/Results'
+import { ThemeToggle } from './components/ThemeToggle'
 
 /** Estado do formulário: tudo string para o input aceitar vazio e vírgula */
 interface FormState {
@@ -127,10 +128,26 @@ export default function App() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:py-12">
       <header className="mb-8">
-        <p className="text-xs font-semibold uppercase tracking-widest text-accent-2">
-          Ferramenta gratuita
-        </p>
-        <h1 className="mt-1 text-3xl font-bold tracking-tight sm:text-4xl">
+        {/* Marca (cubo da logo em badge) + botão de tema */}
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <img
+              src="/brand/mark.png"
+              alt="Jolina 3D"
+              width={48}
+              height={48}
+              className="size-12 rounded-full border border-border object-cover"
+            />
+            <div className="leading-tight">
+              <p className="text-lg font-bold tracking-tight text-accent">Jolina 3D</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-accent-2">
+                Ferramenta gratuita
+              </p>
+            </div>
+          </div>
+          <ThemeToggle />
+        </div>
+        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
           Calculadora de Impressão 3D
         </h1>
         <p className="mt-2 max-w-2xl text-muted">
