@@ -8,10 +8,10 @@
     <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/brand/mark.png" />
     <script>
-      // Aplica o tema salvo antes do React renderizar, evitando "flash" de cor
+      // Padrão é claro; aplica dark salvo antes do React renderizar, evitando "flash" de cor
       try {
         var t = localStorage.getItem('calc3d:theme');
-        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+        if (t === 'dark') document.documentElement.dataset.theme = 'dark';
       } catch (e) {}
     </script>
     <title>Jolina 3D · Calculadora de custos</title>
