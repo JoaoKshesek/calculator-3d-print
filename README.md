@@ -1,7 +1,7 @@
 # Calculadora de Impressão 3D
 
 Calculadora de custo real de peças impressas em 3D, 100% client-side.
-Considera filamento, energia (tarifa por estado + bandeira ANEEL), amortização da impressora,
+Considera filamento, energia (tarifa do Paraná + bandeira ANEEL), amortização da impressora,
 mão de obra, custos fixos e margem de lucro. Os inputs ficam salvos no `localStorage`.
 
 ## Stack
@@ -31,7 +31,7 @@ src/
 ├── lib/
 │   ├── calc.ts             # lógica pura de cálculo (sem React)
 │   ├── calc.test.ts        # testes da lógica
-│   ├── presets.ts          # impressoras, filamentos, tarifas ANEEL, bandeiras
+│   ├── presets.ts          # impressora (Bambu A1 + AMS), filamentos, tarifa PR, bandeiras
 │   └── format.ts           # formatação BRL e parse de vírgula decimal
 └── components/
     ├── Section.tsx         # card de seção
@@ -52,6 +52,6 @@ src/
 
 ## Observações
 
-- Tarifas por estado são médias residenciais aproximadas; ajuste pelo valor da sua conta.
+- Tarifa de energia padrão é a média residencial do Paraná (Copel); o campo é editável.
 - Bandeiras: amarela R$ 0,01885/kWh, vermelha P1 R$ 0,04463/kWh, vermelha P2 R$ 0,07877/kWh.
 - O arquivo `.npmrc` fixa o registry público do npm para não cair no registry privado configurado globalmente.

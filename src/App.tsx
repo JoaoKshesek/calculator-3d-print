@@ -1,14 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { calculate } from './lib/calc'
 import { parseNumber } from './lib/format'
-import {
-  FILAMENTS,
-  FLAGS,
-  LIFE_HOURS,
-  MARGINS,
-  PRINTERS,
-  STATE_TARIFFS,
-} from './lib/presets'
+import { FILAMENTS, FLAGS, KWH_PR, LIFE_HOURS, MARGINS, PRINTERS } from './lib/presets'
 import { Section } from './components/Section'
 import { NumberField } from './components/NumberField'
 import { Chips } from './components/Chips'
@@ -20,7 +13,6 @@ interface FormState {
   gramsUsed: string
   printerWatts: string
   printHours: string
-  stateUf: string
   kwhPrice: string
   flagId: string
   printerPrice: string
@@ -35,17 +27,16 @@ const DEFAULTS: FormState = {
   gramsUsed: '100',
   printerWatts: '200',
   printHours: '5',
-  stateUf: 'PR',
-  kwhPrice: '0,695',
+  kwhPrice: String(KWH_PR).replace('.', ','),
   flagId: 'verde',
-  printerPrice: '2500',
+  printerPrice: '4800',
   printerLifeHours: '5000',
   laborCost: '0',
   fixedCosts: '0',
   marginPercent: '100',
 }
 
-const STORAGE_KEY = 'calc3d:form:v1'
+const STORAGE_KEY = 'calc3d:form:v2'
 
 /** Carrega o último formulário salvo; qualquer falha cai nos defaults */
 function loadInitial(): FormState {
@@ -132,14 +123,6 @@ export default function App() {
   const activeLife = LIFE_HOURS.find((h) => h === parseNumber(form.printerLifeHours))
   const activeMargin = MARGINS.find((m) => m === parseNumber(form.marginPercent))
 
-  const pickState = (uf: string) => {
-    const tariff = STATE_TARIFFS.find((s) => s.uf === uf)
-    setForm((f) => ({
-      ...f,
-      stateUf: uf,
-      kwhPrice: tariff ? String(tariff.kwh).replace('.', ',') : f.kwhPrice,
-    }))
-  }
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:py-12">
@@ -224,32 +207,13 @@ export default function App() {
             </div>
 
             <div className="grid gap-5 sm:grid-cols-2">
-              <div>
-                <label htmlFor="uf" className="mb-1.5 block text-sm font-medium">
-                  Seu estado (tarifa ANEEL)
-                </label>
-                <select
-                  id="uf"
-                  value={form.stateUf}
-                  onChange={(e) => pickState(e.target.value)}
-                  className="w-full rounded-lg border border-border bg-surface-2 px-3 py-2.5 text-base outline-none focus:border-accent focus:ring-2 focus:ring-accent/30"
-                >
-                  {STATE_TARIFFS.map((s) => (
-                    <option key={s.uf} value={s.uf}>
-                      {s.uf} – {s.name}
-                    </option>
-                  ))}
-                </select>
-                <p className="mt-1.5 text-xs text-muted">
-                  Média residencial aproximada por estado. Ajuste pelo valor da sua conta.
-                </p>
-              </div>
               <NumberField
                 label="Valor do kWh"
                 unit="R$"
                 value={form.kwhPrice}
                 onChange={set('kwhPrice')}
                 step={0.01}
+                hint="Tarifa residencial média do Paraná (Copel), com impostos. Ajuste pelo valor da sua conta."
               />
             </div>
 
@@ -291,7 +255,7 @@ export default function App() {
                 />
                 <Chips
                   ariaLabel="Preço de referência"
-                  items={PRINTERS.filter((_, i) => i % 2 === 0 || i === PRINTERS.length - 1).map((p) => ({
+                  items={PRINTERS.map((p) => ({
                     label: `${p.name} ~R$ ${p.price.toLocaleString('pt-BR')}`,
                     value: p.price,
                   }))}
