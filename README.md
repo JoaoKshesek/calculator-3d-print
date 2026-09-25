@@ -2,7 +2,7 @@
 
 Calculadora de custo real de peças impressas em 3D, 100% client-side.
 Considera filamento, energia (tarifa do Paraná + bandeira ANEEL), amortização da impressora,
-mão de obra, custos fixos e margem de lucro. Os inputs ficam salvos no `localStorage`.
+mão de obra, custos fixos e margem de lucro. Os inputs e o tema (claro/escuro) ficam salvos no `localStorage`.
 
 ## Stack
 
@@ -27,7 +27,7 @@ pnpm preview    # serve o build
 src/
 ├── App.tsx                 # formulário, estado e persistência
 ├── main.tsx
-├── index.css               # tokens de tema (dark padrão, light via prefers-color-scheme)
+├── index.css               # tokens de tema Jolina 3D (claro padrão, dark via data-theme)
 ├── lib/
 │   ├── calc.ts             # lógica pura de cálculo (sem React)
 │   ├── calc.test.ts        # testes da lógica
@@ -37,6 +37,7 @@ src/
     ├── Section.tsx         # card de seção
     ├── NumberField.tsx     # input numérico controlado
     ├── Chips.tsx           # presets clicáveis
+    ├── ThemeToggle.tsx     # botão claro/escuro
     └── Results.tsx         # painel de resultado
 ```
 

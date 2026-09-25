@@ -1,67 +1,41 @@
 @import "tailwindcss";
 
-/* Tema: tokens de cor centralizados. Escuro por padrão (comunidade maker curte),
-   claro via prefers-color-scheme. */
-/* Marca Jolina 3D: roxo #5b21b6 / turquesa #2ec4cc / lavanda #e4d4f8 (da logo).
-   Dark: superfícies com tom roxo em vez de cinza neutro. */
+/* Tema Jolina 3D. Claro é o padrão; escuro só quando o usuário escolhe
+   (data-theme="dark" no <html>, controlado pelo ThemeToggle). */
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --color-bg: #110b1c;
-  --color-surface: #191227;
-  --color-surface-2: #221934;
-  --color-border: #322646;
-  --color-text: #ece6f5;
-  --color-muted: #a99cbf;
+
+  /* Light: lilás da paleta no fundo, cards em lilás mais claro (sem branco puro) */
+  --color-bg: #e1d7e4;
+  --color-surface: #f0eaf5;
+  --color-surface-2: #e6ddee;
+  --color-border: #c9bcd9;
+  --color-text: #1e1132;
+  --color-muted: #5a4a75;
+  --color-accent: #5b2f86;        /* roxo da paleta */
+  --color-accent-soft: #5b2f8622;
+  --color-accent-2: #0b8790;      /* turquesa escurecido p/ legibilidade */
+  --color-accent-2-soft: #0b87901a;
+  --color-ok: #22c55e;
+}
+
+/* Dark: roxo bem escuro da paleta, cards um tom acima */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg: #0c0a11;
+  --color-surface: #14101b;
+  --color-surface-2: #1b1226;
+  --color-border: #2a1a3a;
+  --color-text: #efeaf6;
+  --color-muted: #bdb3cc;
   --color-accent: #b48cf7;        /* roxo clareado p/ contraste no escuro */
   --color-accent-soft: #b48cf72b;
   --color-accent-2: #3fd0d8;      /* turquesa da logo, um tom mais claro */
   --color-accent-2-soft: #3fd0d824;
-  --color-ok: #22c55e;
-}
-
-/* Tema claro: aplicado (a) pela preferência do sistema, salvo se o usuário
-   forçou dark, ou (b) quando o usuário forçou light via botão. */
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    --light: 1;
-  }
-}
-:root[data-theme="light"] {
-  --light: 1;
-}
-
-/* Tokens do tema claro: lavanda da logo como fundo, cards brancos */
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    color-scheme: light;
-    --color-bg: #ece3fa;
-    --color-surface: #ffffff;
-    --color-surface-2: #f5f0fc;
-    --color-border: #d9cdee;
-    --color-text: #1d1230;
-    --color-muted: #6b5d85;
-    --color-accent: #5b21b6;
-    --color-accent-soft: #5b21b61a;
-    --color-accent-2: #0e9aa3;
-    --color-accent-2-soft: #0e9aa31a;
-  }
-}
-:root[data-theme="light"] {
-  color-scheme: light;
-  --color-bg: #ece3fa;
-  --color-surface: #ffffff;
-  --color-surface-2: #f5f0fc;
-  --color-border: #d9cdee;
-  --color-text: #1d1230;
-  --color-muted: #6b5d85;
-  --color-accent: #5b21b6;
-  --color-accent-soft: #5b21b61a;
-  --color-accent-2: #0e9aa3;
-  --color-accent-2-soft: #0e9aa31a;
 }
 
 html {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {

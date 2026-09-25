@@ -3,15 +3,15 @@ import { useEffect, useState } from 'react'
 type Theme = 'light' | 'dark'
 const STORAGE_KEY = 'calc3d:theme'
 
-/** Tema inicial: o salvo pelo usuário, senão a preferência do sistema */
+/** Tema inicial: o salvo pelo usuário, senão claro */
 function getInitialTheme(): Theme {
   try {
     const saved = localStorage.getItem(STORAGE_KEY)
     if (saved === 'light' || saved === 'dark') return saved
   } catch {
-    /* storage bloqueado: cai no sistema */
+    /* storage bloqueado: cai no padrão */
   }
-  return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+  return 'light'
 }
 
 /** Botão que alterna claro/escuro e persiste a escolha */
