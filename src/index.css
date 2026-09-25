@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+/* Tema: tokens de cor centralizados. Escuro por padrão (comunidade maker curte),
+   claro via prefers-color-scheme. */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-bg: #0f1115;
+  --color-surface: #171a21;
+  --color-surface-2: #1f232c;
+  --color-border: #2b303b;
+  --color-text: #e6e8ee;
+  --color-muted: #9aa3b2;
+  /* Marca: roxo (primário) e turquesa (secundário) */
+  --color-accent: #a78bfa;
+  --color-accent-soft: #a78bfa2b;
+  --color-accent-2: #2dd4bf;
+  --color-accent-2-soft: #2dd4bf24;
+  --color-ok: #22c55e;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-bg: #f5f6f8;
+    --color-surface: #ffffff;
+    --color-surface-2: #f1f3f6;
+    --color-border: #dde1e7;
+    --color-text: #14171d;
+    --color-muted: #5b6472;
+    --color-accent: #7c3aed;
+    --color-accent-soft: #7c3aed1a;
+    --color-accent-2: #0d9488;
+    --color-accent-2-soft: #0d948818;
+  }
+}
+
+html {
+  color-scheme: dark light;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+}
+
+/* Remove os spinners dos inputs numéricos para visual mais limpo */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
